@@ -18,27 +18,24 @@ public class ThreadTest {
 
     }
 
-    private Thread createThread1() {
+    private synchronized Thread createThread1() {
         return new Thread(() -> {
             randomSleep();
-            synchronized (this) {
                 x = 1;
                 y_read = y;
-            }
         });
     }
 
-    private Thread createThread2() {
+    private synchronized Thread createThread2() {
         return new Thread(() -> {
             randomSleep();
-            synchronized (this) {
                 y = 1;
                 x_read = x;
-            }
         });
     }
 
     public static void main(String[] args) throws InterruptedException {
+
         while (true) {
 
 
